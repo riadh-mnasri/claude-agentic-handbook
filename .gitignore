@@ -1,0 +1,23 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.memory.json
+
+# Node
+node_modules/
+dist/
+
+# Kotlin / Gradle
+.gradle/
+build/
+.kotlin/
+*.iml
+.idea/
+
+# Secrets
+.env
+.env.*
+!.env.example
+.DS_Store

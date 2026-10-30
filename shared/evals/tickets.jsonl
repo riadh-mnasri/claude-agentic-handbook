@@ -1,0 +1,12 @@
+{"id": "t01", "text": "Hi, I was charged twice for order ORD-1001. Can you fix this?", "category": "billing", "urgency": "high"}
+{"id": "t02", "text": "Where is my parcel? Order ORD-1002 was supposed to arrive yesterday.", "category": "shipping", "urgency": "medium"}
+{"id": "t03", "text": "Do you have a book about evaluating AI systems for beginners?", "category": "product", "urgency": "low"}
+{"id": "t04", "text": "My order ORD-1003 never arrived and the tracking says lost. I want my money back.", "category": "refund", "urgency": "high"}
+{"id": "t05", "text": "How do I change the email address on my account?", "category": "account", "urgency": "low"}
+{"id": "t06", "text": "The book I received in ORD-1005 has torn pages, I would like a refund please.", "category": "refund", "urgency": "medium"}
+{"id": "t07", "text": "Is 'Designing Workflows' back in stock soon?", "category": "product", "urgency": "low"}
+{"id": "t08", "text": "I cannot log in, the password reset link is expired every time.", "category": "account", "urgency": "medium"}
+{"id": "t09", "text": "Your invoice shows VAT at the wrong rate, I need a corrected invoice for my company today.", "category": "billing", "urgency": "high"}
+{"id": "t10", "text": "Can I still change the delivery address for ORD-1006? It has not shipped yet.", "category": "shipping", "urgency": "medium"}
+{"id": "t11", "text": "Just wanted to say thank you, the novel was lovely!", "category": "other", "urgency": "low"}
+{"id": "t12", "text": "I returned ORD-1004 two months ago and still have not been refunded.", "category": "refund", "urgency": "medium"}
