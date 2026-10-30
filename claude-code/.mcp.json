@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "paperleaf": {
+      "command": "uv",
+      "args": ["run", "--directory", "../python", "python", "examples/ex11_mcp_server.py"]
+    }
+  }
+}

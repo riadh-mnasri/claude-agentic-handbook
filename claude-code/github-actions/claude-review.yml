@@ -1,0 +1,34 @@
+# © 2026 Riadh MNASRI. MIT License.
+# Copy to .github/workflows/ in your own repository.
+# Runs Claude Code on every pull request, and when someone writes @claude in a comment.
+# Requires the ANTHROPIC_API_KEY secret (or run `/install-github-app` from Claude Code).
+name: claude-review
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  review:
+    if: github.event_name == 'pull_request' || contains(github.event.comment.body, '@claude')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          # Without a prompt the action answers @claude mentions; with one it runs it on each PR.
+          prompt: |
+            Review this pull request with the rules of CLAUDE.md.
+            Comment inline on real problems only, then post a short summary.
+          claude_args: "--max-budget-usd 2 --allowedTools Read,Grep,Glob,Bash(git diff:*)"
