@@ -102,7 +102,7 @@ while True:
 
 ### 4. Messages API, Tool Runner
 
-The SDK runs the loop; you only write typed tool functions.
+The SDK runs the loop; you only write typed tool functions. Full code: `ex13`.
 
 ```python
 from anthropic import beta_tool
@@ -148,7 +148,7 @@ async for message in query(prompt="Audit this repo", options=ClaudeAgentOptions(
 ### 6. Claude Managed Agents
 
 Anthropic runs the loop **and** a sandboxed container per session. You define
-the agent once (versioned), then start sessions and stream events.
+the agent once (versioned), then start sessions and stream events. Full code: `ex14`.
 
 ```python
 agent = client.beta.agents.create(            # once, in a setup script
@@ -204,7 +204,7 @@ first: you will then understand what any framework does, and debug it.
 | **Isolated worktree** | `claude -w feature-x` creates a git worktree for the session | Parallel agents on the same repo without conflicts | |
 | **Cloud session** | `claude --cloud "task"`, or claude.ai/code | Runs remotely, keeps going when your laptop sleeps | |
 | **Resumed session** | `claude --continue` or `--resume <id>`, `resume` option in the SDK | Long tasks done in several sittings | |
-| **From your code** | `client.messages.create` loop, `tool_runner`, `query()` | Products and services | `ex02`, `ex12` |
+| **From your code** | `client.messages.create` loop, `tool_runner`, `query()` | Products and services | `ex02`, `ex12`, `ex13` |
 | **As a subagent** | A parent agent delegates through its Agent tool | Isolating context, parallel research | `.claude/agents/`, `ex12` |
 | **In CI** | GitHub Action `anthropics/claude-code-action`, or `claude -p` in any pipeline | PR review, `@claude` mentions, auto-fixes | `claude-code/github-actions/` |
 | **On a schedule** | Cron + headless command, Claude Code routines (`/schedule`), Managed Agents scheduled deployments | Nightly reports, weekly audits | |
@@ -240,6 +240,7 @@ Launch checklist, whatever the mode:
 | Manual loop | `uv run python examples/ex02_agent_loop.py "Where is ORD-1003?"` |
 | TypeScript | `npx tsx src/examples/02-agent-loop.ts "Where is ORD-1003?"` |
 | Kotlin | `./gradlew run -Pexample=Ex02AgentLoop --args="Where is ORD-1003?"` |
+| Tool Runner | `uv run python examples/ex13_tool_runner.py "Where is ORD-1003?"` |
 | Headless CLI | `claude -p "Where is ORD-1003?" --mcp-config claude-code/.mcp.json` |
 | Agent SDK | `query(prompt="Where is ORD-1003?", options=ClaudeAgentOptions(mcp_servers=...))` |
 | Managed Agents | Create the agent with the MCP server, start a session, send the message |
