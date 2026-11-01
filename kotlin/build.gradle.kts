@@ -9,6 +9,7 @@ dependencies {
     implementation("com.anthropic:anthropic-java:3.3.0")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.19.4")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
+    implementation("io.modelcontextprotocol:kotlin-sdk:0.16.0")
     testImplementation(kotlin("test"))
     testImplementation("org.junit.jupiter:junit-jupiter:5.13.4")
     testImplementation("org.assertj:assertj-core:3.27.6")

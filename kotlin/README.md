@@ -1,6 +1,6 @@
 # Kotlin examples
 
-Examples 01 to 10 of the [Claude Agentic Handbook](../README.md), on the
+Examples 01 to 11 of the [Claude Agentic Handbook](../README.md), on the
 official Java SDK (`com.anthropic:anthropic-java`), with a hexagonal design:
 
 - `handbook.core.LanguageModel` is the **port** the examples depend on (domain types only);
@@ -14,14 +14,16 @@ export ANTHROPIC_API_KEY=...                     # only for real runs
 ./gradlew run -q -Pexample=Ex08GuardrailsHitl --args="Please refund ORD-1003"
 ```
 
-Parallel patterns (05, 06, 10) use Kotlin coroutines. There is no Agent SDK for
+Parallel patterns (05, 06, 10) use Kotlin coroutines. Example 11 is an MCP
+server built with the official Kotlin MCP SDK (run it with `./gradlew -q run
+-Pexample=Ex11McpServer`: `-q` keeps stdout clean for the protocol). There is no Agent SDK for
 the JVM: from Kotlin, use the Messages API (this folder) or call `claude -p`.
 
 ---
 
 # Exemples Kotlin
 
-Les exemples 01 à 10 du [Claude Agentic Handbook](../README.fr.md), sur le SDK
+Les exemples 01 à 11 du [Claude Agentic Handbook](../README.fr.md), sur le SDK
 Java officiel, en architecture hexagonale : `LanguageModel` est le **port**,
 `AnthropicLanguageModel` le seul **adaptateur** qui connaît le SDK, et les
 tests branchent un `FakeModel` scénarisé.
