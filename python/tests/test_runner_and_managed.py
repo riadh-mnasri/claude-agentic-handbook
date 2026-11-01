@@ -33,6 +33,7 @@ class FakeManagedClient:
 
     def _send(self, session_id, events):
         self.log.append(("send", events[0]["type"]))
+        self.sent = getattr(self, "sent", []) + events
 
 
 def test_14_session_pins_the_version_and_opens_the_stream_before_sending():
@@ -46,3 +47,15 @@ def test_14_session_pins_the_version_and_opens_the_stream_before_sending():
     assert result == "2 refundable orders, 158 EUR."
     assert [entry[0] for entry in client.log] == ["session", "stream", "send"]
     assert client.log[0][1]["agent"] == {"type": "agent", "id": "agent_1", "version": 3}
+
+
+def test_14_paused_tool_calls_are_denied_when_nobody_watches():
+    client = FakeManagedClient([
+        NS(type="agent.tool_use", id="tu_1", evaluated_permission="ask"),
+        NS(type="session.status_idle", stop_reason=NS(type="requires_action")),  # keeps streaming
+        NS(type="agent.message", content=[NS(type="text", text="Done without it.")]),
+        NS(type="session.status_idle", stop_reason=NS(type="end_turn")),
+    ])
+    assert ex14.run(client, "agent_1", 1, "env_1", "task", "{}") == "Done without it."
+    confirmation = client.sent[-1]
+    assert confirmation == {"type": "user.tool_confirmation", "tool_use_id": "tu_1", "result": "deny"}

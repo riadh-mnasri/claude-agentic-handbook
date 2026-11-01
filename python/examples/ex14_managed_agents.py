@@ -6,6 +6,10 @@ Two phases, never mixed:
 - run (every time): create a session pinned to an agent version, open the
   event stream FIRST, then send the task, and read events until the agent is idle.
 
+With the "auto" permission policy, a tool call can pause for a decision
+(evaluated_permission == "ask"). Always answer it: an unanswered call leaves
+the session waiting forever. When nobody is watching, the answer is "deny".
+
 The agent here analyses the bookshop dataset uploaded to its sandbox.
 Beta API. Needs ANTHROPIC_API_KEY.
 
@@ -16,6 +20,7 @@ Run: uv run python examples/ex14_managed_agents.py setup   # prints the ids to e
 
 import os
 import sys
+from typing import Callable
 
 from handbook.config import MODEL, make_client
 
@@ -44,7 +49,12 @@ def setup(client) -> dict:
             "HANDBOOK_AGENT_VERSION": str(agent.version)}
 
 
-def run(client, agent_id: str, agent_version: int, environment_id: str, task: str, dataset: str) -> str:
+def deny_unattended(_event) -> bool:
+    return False
+
+
+def run(client, agent_id: str, agent_version: int, environment_id: str, task: str, dataset: str,
+        approve: Callable[[object], bool] = deny_unattended) -> str:
     session = client.beta.sessions.create(
         agent={"type": "agent", "id": agent_id, "version": agent_version},
         environment_id=environment_id,
@@ -60,6 +70,12 @@ def run(client, agent_id: str, agent_version: int, environment_id: str, task: st
         for event in stream:
             if event.type == "agent.message":
                 output.extend(b.text for b in event.content if b.type == "text")
+            elif event.type in ("agent.tool_use", "agent.mcp_tool_use") and event.evaluated_permission == "ask":
+                client.beta.sessions.events.send(session_id=session.id, events=[{
+                    "type": "user.tool_confirmation",
+                    "tool_use_id": event.id,
+                    "result": "allow" if approve(event) else "deny",
+                }])
             elif event.type == "session.status_idle" and event.stop_reason.type != "requires_action":
                 break
             elif event.type == "session.status_terminated":
