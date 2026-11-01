@@ -11,7 +11,7 @@ différence : **qui héberge les outils**.
 | Les outils tournent | Sur votre machine ou votre conteneur | Dans un bac à sable par session hébergé par Anthropic (ou auto-hébergé) |
 | État | Sessions reprenables, fichiers sur votre disque | Agents persistés et versionnés, sessions avec flux d'événements, memory stores |
 | Idéal pour | Bots de CI, outils internes, agents de code sur votre infrastructure | Agents de longue durée, planifiés ou nombreux en parallèle, sans exploiter de bacs à sable |
-| Exemple | `ex12` (Python et TypeScript) | `ex14` (Python) |
+| Exemple | `ex12` (Python et TypeScript) | `ex14` (Python et TypeScript) |
 
 ## L'essentiel de l'Agent SDK
 
@@ -64,6 +64,11 @@ flowchart LR
 4. Lisez les événements jusqu'à `session.status_idle` (sauf s'il vous attend
    avec `requires_action`, par exemple pour confirmer un outil ou fournir le
    résultat d'un outil sur mesure).
+5. **Répondez à chaque appel en pause.** Avec la politique de permission
+   `auto`, un appel d'outil peut se mettre en pause avec
+   `evaluated_permission == "ask"`. Envoyez un `user.tool_confirmation`
+   (`allow` ou `deny`) : un appel sans réponse laisse la session en attente
+   indéfiniment. Quand personne ne surveille, répondez `deny`, jamais `allow` à tout.
 
 Également disponibles : politiques de permission par outil (`always_allow`,
 `always_ask`, `auto`), outils sur mesure exécutés par votre code, serveurs MCP
@@ -71,8 +76,9 @@ avec identifiants dans des coffres, memory stores, équipes et workflows
 multi-agents, déploiements planifiés (cron), budgets de session en dollars, et
 un visualiseur de session dans la Console pour inspecter chaque événement.
 
-`ex14_managed_agents.py` montre les phases d'installation et d'exécution, et
-son test vérifie les deux règles les plus souvent enfreintes : la version est
-figée, et le flux est ouvert avant l'envoi du message.
+`ex14` (Python et TypeScript) montre les phases d'installation et
+d'exécution, et ses tests vérifient les trois règles les plus souvent
+enfreintes : la version est figée, le flux est ouvert avant l'envoi du
+message, et les appels en pause reçoivent une réponse.
 
 Suite : [11. Garde-fous et sécurité](11-guardrails-and-security.md).

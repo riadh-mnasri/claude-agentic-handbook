@@ -1,6 +1,6 @@
 # TypeScript examples
 
-Examples 01 to 12 of the [Claude Agentic Handbook](../README.md), on
+Examples 01 to 14 of the [Claude Agentic Handbook](../README.md), on
 `@anthropic-ai/sdk`, `@anthropic-ai/claude-agent-sdk` and
 `@modelcontextprotocol/sdk`. Tests with vitest, strict type checking.
 
@@ -25,7 +25,7 @@ npx tsx src/examples/02-agent-loop.ts "Where is ORD-1003?"
 
 # Exemples TypeScript
 
-Les exemples 01 à 12 du [Claude Agentic Handbook](../README.fr.md). Tests avec
+Les exemples 01 à 14 du [Claude Agentic Handbook](../README.fr.md). Tests avec
 vitest, typage strict.
 
 ```bash

@@ -55,15 +55,16 @@ jeu d'évaluation, et une commande dont le message cadeau cache une injection de
 | 08 | Garde-fous, humain dans la boucle, injection de prompt | [py](python/examples/ex08_guardrails_hitl.py) | [ts](typescript/src/examples/08-guardrails-hitl.ts) | [kt](kotlin/src/main/kotlin/handbook/examples/Ex08GuardrailsHitl.kt) |
 | 09 | Cache, compaction, mémoire longue | [py](python/examples/ex09_context_memory.py) | [ts](typescript/src/examples/09-context-memory.ts) | [kt](kotlin/src/main/kotlin/handbook/examples/Ex09ContextMemory.kt) |
 | 10 | Évaluations : correcteur par le code et LLM juge | [py](python/examples/ex10_evals.py) | [ts](typescript/src/examples/10-evals.ts) | [kt](kotlin/src/main/kotlin/handbook/examples/Ex10Evals.kt) |
-| 11 | Serveur MCP | [py](python/examples/ex11_mcp_server.py) | [ts](typescript/src/examples/11-mcp-server.ts) | |
+| 11 | Serveur MCP | [py](python/examples/ex11_mcp_server.py) | [ts](typescript/src/examples/11-mcp-server.ts) | [kt](kotlin/src/main/kotlin/handbook/examples/Ex11McpServer.kt) |
 | 12 | Claude Agent SDK : hooks, sous-agent, MCP | [py](python/examples/ex12_agent_sdk.py) | [ts](typescript/src/examples/12-agent-sdk.ts) | |
-| 13 | Tool Runner | [py](python/examples/ex13_tool_runner.py) | | |
-| 14 | Managed Agents | [py](python/examples/ex14_managed_agents.py) | | |
+| 13 | Tool Runner | [py](python/examples/ex13_tool_runner.py) | [ts](typescript/src/examples/13-tool-runner.ts) | |
+| 14 | Managed Agents | [py](python/examples/ex14_managed_agents.py) | [ts](typescript/src/examples/14-managed-agents.ts) | |
 
 Et aussi [`claude-code/`](claude-code) : une configuration Claude Code prête à
 copier (`CLAUDE.md`, sous-agents, une skill, permissions, hooks, script de
 revue headless, GitHub Action). L'Agent SDK n'existe pas pour la JVM, d'où
-l'absence des exemples 11 et 12 en Kotlin.
+l'absence de l'exemple 12 en Kotlin ; les exemples 13 et 14 ne sont montrés
+qu'en Python et en TypeScript.
 
 La **boucle d'agent durcie** réutilisable (permissions, validation humaine,
 données non fiables, limites) : [`loop.py`](python/src/handbook/loop.py),
@@ -99,11 +100,11 @@ Ils sont écrits en Given / When / Then. La CI lance les trois suites à chaque 
 ## État et feuille de route
 
 - [x] Guide en anglais et en français (15 chapitres)
-- [x] Exemples Python 01 à 14, TypeScript 01 à 12, Kotlin 01 à 10, tous testés hors ligne
+- [x] Exemples Python et TypeScript 01 à 14, Kotlin 01 à 11, tous testés hors ligne
 - [x] Exemples de configuration Claude Code
 - [ ] Sorties enregistrées d'exécutions réelles contre l'API
-- [ ] Serveur MCP en Kotlin avec le SDK MCP Kotlin officiel
-- [ ] Exemples Tool Runner et Managed Agents en TypeScript
+- [x] Serveur MCP en Kotlin avec le SDK MCP Kotlin officiel
+- [x] Exemples Tool Runner et Managed Agents en TypeScript
 
 ## Licence
 

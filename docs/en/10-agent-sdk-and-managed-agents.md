@@ -11,7 +11,7 @@ difference is **who hosts the tools**.
 | Tools run | On your machine or container | In a per-session sandbox hosted by Anthropic (or self-hosted) |
 | State | Sessions you can resume, files on your disk | Persisted, versioned agents; sessions with event streams; memory stores |
 | Best for | CI bots, internal tools, coding agents on your infra | Long-running, scheduled or many concurrent agents without operating sandboxes |
-| Example | `ex12` (Python and TypeScript) | `ex14` (Python) |
+| Example | `ex12` (Python and TypeScript) | `ex14` (Python and TypeScript) |
 
 ## Agent SDK essentials
 
@@ -63,6 +63,10 @@ flowchart LR
    `user.define_outcome` for a single deliverable graded against a rubric).
 4. Read events until `session.status_idle` (unless it is waiting for you with
    `requires_action`, for example a tool confirmation or a custom tool result).
+5. **Answer every paused call.** With the `auto` permission policy, a tool call
+   can pause with `evaluated_permission == "ask"`. Send a `user.tool_confirmation`
+   (`allow` or `deny`); an unanswered call leaves the session waiting forever.
+   When nobody is watching, answer `deny`, never `allow` to everything.
 
 Also available: permission policies per tool (`always_allow`, `always_ask`,
 `auto`), custom tools executed by your code, MCP servers with credentials in
@@ -70,8 +74,8 @@ vaults, memory stores, multi-agent rosters and workflows, scheduled
 deployments (cron), session budgets in dollars, and a session viewer in the
 Console to inspect every event.
 
-`ex14_managed_agents.py` shows the setup and run phases, and its test checks
-the two rules people break most: the version is pinned, and the stream is
-opened before the message is sent.
+`ex14` (Python and TypeScript) shows the setup and run phases, and its tests
+check the three rules people break most: the version is pinned, the stream is
+opened before the message is sent, and paused tool calls are answered.
 
 Next: [11. Guardrails and security](11-guardrails-and-security.md).

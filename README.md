@@ -54,15 +54,15 @@ message hides a prompt injection.
 | 08 | Guardrails, human in the loop, prompt injection | [py](python/examples/ex08_guardrails_hitl.py) | [ts](typescript/src/examples/08-guardrails-hitl.ts) | [kt](kotlin/src/main/kotlin/handbook/examples/Ex08GuardrailsHitl.kt) |
 | 09 | Caching, compaction, long-term memory | [py](python/examples/ex09_context_memory.py) | [ts](typescript/src/examples/09-context-memory.ts) | [kt](kotlin/src/main/kotlin/handbook/examples/Ex09ContextMemory.kt) |
 | 10 | Evals: code grader and LLM judge | [py](python/examples/ex10_evals.py) | [ts](typescript/src/examples/10-evals.ts) | [kt](kotlin/src/main/kotlin/handbook/examples/Ex10Evals.kt) |
-| 11 | MCP server | [py](python/examples/ex11_mcp_server.py) | [ts](typescript/src/examples/11-mcp-server.ts) | |
+| 11 | MCP server | [py](python/examples/ex11_mcp_server.py) | [ts](typescript/src/examples/11-mcp-server.ts) | [kt](kotlin/src/main/kotlin/handbook/examples/Ex11McpServer.kt) |
 | 12 | Claude Agent SDK: hooks, subagent, MCP | [py](python/examples/ex12_agent_sdk.py) | [ts](typescript/src/examples/12-agent-sdk.ts) | |
-| 13 | Tool Runner | [py](python/examples/ex13_tool_runner.py) | | |
-| 14 | Managed Agents | [py](python/examples/ex14_managed_agents.py) | | |
+| 13 | Tool Runner | [py](python/examples/ex13_tool_runner.py) | [ts](typescript/src/examples/13-tool-runner.ts) | |
+| 14 | Managed Agents | [py](python/examples/ex14_managed_agents.py) | [ts](typescript/src/examples/14-managed-agents.ts) | |
 
 Plus [`claude-code/`](claude-code): a ready-to-copy Claude Code setup
 (`CLAUDE.md`, subagents, a skill, permissions, hooks, headless review script,
-GitHub Action). The Agent SDK has no JVM version, which is why examples 11 and
-12 are not in Kotlin.
+GitHub Action). The Agent SDK has no JVM version, which is why example 12 is
+not in Kotlin; 13 and 14 use SDK features shown in Python and TypeScript only.
 
 The reusable **hardened agent loop** (permissions, human approval, untrusted
 data, limits): [`loop.py`](python/src/handbook/loop.py),
@@ -98,11 +98,11 @@ runs the three suites on every push.
 ## Status and roadmap
 
 - [x] Guide in English and French (15 chapters)
-- [x] Python examples 01 to 14, TypeScript 01 to 12, Kotlin 01 to 10, all tested offline
+- [x] Python and TypeScript examples 01 to 14, Kotlin 01 to 11, all tested offline
 - [x] Claude Code configuration examples
 - [ ] Recorded outputs from real API runs
-- [ ] Kotlin MCP server with the official Kotlin MCP SDK
-- [ ] TypeScript Tool Runner and Managed Agents examples
+- [x] Kotlin MCP server with the official Kotlin MCP SDK
+- [x] TypeScript Tool Runner and Managed Agents examples
 
 ## License
 

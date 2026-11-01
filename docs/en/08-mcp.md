@@ -39,6 +39,8 @@ flowchart LR
 claude mcp add paperleaf -- uv run --directory python python examples/ex11_mcp_server.py
 # or the TypeScript version
 claude mcp add paperleaf-ts -- npx tsx typescript/src/examples/11-mcp-server.ts
+# or the Kotlin version (-q keeps stdout clean)
+claude mcp add paperleaf-kt -- ./gradlew -q -p kotlin run -Pexample=Ex11McpServer
 # then, in Claude Code: "Is ORD-1003 refundable?"
 ```
 
@@ -58,7 +60,8 @@ a remote server is declared with `mcp_servers=[{"type": "url", ...}]` **and**
 - **Treat what comes back as untrusted.** A server that returns third-party
   text (emails, web pages, tickets) is a prompt-injection channel. Only
   install servers you trust, and pin their versions.
-- Test it without a model: both languages have in-memory clients
-  (`tests/test_evals_mcp_sdk.py`, `tests/evals-mcp-sdk.test.ts`).
+- Test it without a model: Python and TypeScript have in-memory clients
+  (`tests/test_evals_mcp_sdk.py`, `tests/evals-mcp-sdk.test.ts`); the Kotlin
+  test wires a real client to the server through pipes (`McpServerTest.kt`).
 
 Next: [09. Claude Code as an agent platform](09-claude-code.md).
